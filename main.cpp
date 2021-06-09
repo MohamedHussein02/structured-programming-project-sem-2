@@ -384,13 +384,13 @@ int main() {
             }
             case 11: {
                 if(writeSaveFile(expenses, (string &) expensesSaveFilePath)) {
-                    cout << "expenses saved successfully";
+                    cout << "expenses saved successfully \n";
                 }
                 if(writeSaveFile(incomes, (string &) incomesSaveFilePath)) {
-                    cout << "incomes saved successfully";
+                    cout << "incomes saved successfully \n";
                 }
                 if(writeSaveFile(recurringCost, (string &) recurringCostsSaveFilePath)) {
-                    cout << "recurring costs saved successfully";
+                    cout << "recurring costs saved successfully \n";
                 }
             }
             case -1: {
