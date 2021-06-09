@@ -36,7 +36,6 @@ void displayMainMenu() // Displays the main menu to the user
 
 string getMonthName(int num) // takes a number from 1 to 12 and returns the month corresponding to the number
 {
-    string month;
     string monthsArray[] = {"Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
     if (num < 1  || num > 12) {
