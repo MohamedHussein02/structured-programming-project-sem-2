@@ -73,13 +73,13 @@ void listOptions(const string& s) // lists vector options
 }
 
 
-int choice(const string& s) // take name of option of the list and makes a validation check
+int getSelectedOption(const string& s) // take name of option of the list and makes a validation check
 {
     int option;
     listOptions(s);
     cin >> option;
     while(option != 1 && option != 2 && option != 3){
-        cout << "oops you entered an invalid choice, try once more!" << endl;
+        cout << "oops you entered an invalid getSelectedOption, try once more!" << endl;
         listOptions(s);
         cin >> option;
     }
@@ -98,7 +98,7 @@ void listVector(vector<Data> vec) // takes a vector and returns its values
     }
 }
 
-double calculateTotal(const vector<Data>& vec) // Calculate the total amount in a given vector
+double getDataTotalAmount(const vector<Data>& vec) // Calculate the total amount in a given vector
 {
     double sum = 0;
     for (auto & i : vec) {
@@ -109,9 +109,9 @@ double calculateTotal(const vector<Data>& vec) // Calculate the total amount in 
 
 void quickView() // Outputs a quick view of all lists
 {
-    double totalIncome = calculateTotal(incomes);
-    double totalExpenses = calculateTotal(expenses);
-    double totalReccuringCosts = calculateTotal(recurringCost);
+    double totalIncome = getDataTotalAmount(incomes);
+    double totalExpenses = getDataTotalAmount(expenses);
+    double totalReccuringCosts = getDataTotalAmount(recurringCost);
 
     cout << "Total Income " << totalIncome << endl;
     cout << "Total expenses " << totalExpenses << endl;
@@ -127,7 +127,7 @@ void editValue(vector<Data> &vec) // User enters list and number of item he want
     listVector(vec);
     cin >> number;
     while(!(number>0 && number <= vec.size()) ) {
-        cout << "oops you entered an invalid choice, try once more!" << endl;
+        cout << "oops you entered an invalid getSelectedOption, try once more!" << endl;
         listVector(vec);
         cin >> number;
     }
@@ -141,9 +141,9 @@ void editValue(vector<Data> &vec) // User enters list and number of item he want
 }
 
 void detailedView() { // outputs a detailed view of all lists
-    double totalIncome = calculateTotal(incomes);
-    double totalExpenses = calculateTotal(expenses);
-    double totalReccuringCosts = calculateTotal(recurringCost);
+    double totalIncome = getDataTotalAmount(incomes);
+    double totalExpenses = getDataTotalAmount(expenses);
+    double totalReccuringCosts = getDataTotalAmount(recurringCost);
 
     cout << "Income:" << endl;
     listVector(incomes);
@@ -175,7 +175,7 @@ int startMonth() // takes the starting month from the user and returns it
     listMonths(1);
     cin >> start;
     while(!(start > 0 && start <= 12)){
-        cout << "oops you entered an invalid choice, try once more!" << endl;
+        cout << "oops you entered an invalid getSelectedOption, try once more!" << endl;
         listMonths(1);
         cin >> start;
     }
@@ -189,7 +189,7 @@ int endMonth(int start) // lists months and take end month from user and returns
     listMonths(start + 1);
     cin >> end;
     while(!(end > start && end <= 12)){
-        cout << "oops you entered an invalid choice, try once more!" << endl;
+        cout << "oops you entered an invalid getSelectedOption, try once more!" << endl;
         listMonths(start + 1);
         cin >> end;
     }
@@ -198,9 +198,9 @@ int endMonth(int start) // lists months and take end month from user and returns
 
 double budgetDifferanceInAnInterval(int start, int end)
 {
-    double totalIncome = calculateTotal(incomes);
-    double totalExpenses = calculateTotal(expenses);
-    double original = calculateTotal(recurringCost);
+    double totalIncome = getDataTotalAmount(incomes);
+    double totalExpenses = getDataTotalAmount(expenses);
+    double original = getDataTotalAmount(recurringCost);
     double totalRecurring = 0;
     for (int i = start; i <= end ; ++i) {
         totalRecurring += original;
@@ -215,7 +215,7 @@ void deleteValue (vector<Data> &vec) { //user enters list and number of item he 
     listVector(vec);
     cin >> number;
     while (!(number > 0 && number <= vec.size())) {
-        cout << "oops you entered an invalid choice, try once more!" << endl;
+        cout << "oops you entered an invalid getSelectedOption, try once more!" << endl;
         listVector(vec);
         cin >> number;
     }
@@ -225,7 +225,7 @@ void deleteValue (vector<Data> &vec) { //user enters list and number of item he 
     vec.erase(vec.begin() + number);
 }
 
-int read_input(const string& s) // asks the user how many inputs he wants to enter
+int readUserDesiredInputsCount(const string& s) // asks the user how many inputs he wants to enter
 {
     int input = -1;
     bool valid= false;
@@ -296,17 +296,17 @@ int main() {
         cin >> option;
         switch (option) {
             case 1: {
-                size = read_input("expenses");
+                size = readUserDesiredInputsCount("expenses");
                 takeInput(expenses, size, "expense");
                 break;
             }
             case 2: {
-                size = read_input("income");
+                size = readUserDesiredInputsCount("income");
                 takeInput(incomes, size, "income");
                 break;
             }
             case 3: {
-                size = read_input("recurring costs");
+                size = readUserDesiredInputsCount("recurring costs");
                 takeInput(recurringCost, size, "recurring costs");
                 break;
             }
@@ -321,7 +321,7 @@ int main() {
                 break;
             }
             case 6: {
-                int number = choice("edit");
+                int number = getSelectedOption("edit");
                 switch (number) {
                     case 1 : {
                         editValue(expenses);
@@ -342,7 +342,7 @@ int main() {
                 break;
             }
             case 7: {
-                switch (choice("delete")) {
+                switch (getSelectedOption("delete")) {
                     case 1:{
                         deleteValue(expenses);
                         break;
@@ -397,7 +397,7 @@ int main() {
                 break;
             }
             default: {
-                cout << "oops you entered an invalid choice, try once more!" << endl;
+                cout << "oops you entered an invalid option, try once more!" << endl;
                 break;
             }
         }
